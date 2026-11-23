@@ -4,8 +4,9 @@
     <!-- Basic Page Metadata & Mobile-First Responsive Viewport -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>AM App Store — Official Android Apps &amp; Games Hub</title>
-    <meta name="description" content="AM App Store: Official hub for AM Voice Prank, verified Android gaming tools, soundboards, and utilities with live Firebase updates.">
+    <title>AM Apps - AM App Store</title>
+
+    <meta name="description" content="AM Apps - Official AM App Store for AM Voice Prank and upcoming verified Android tools, soundboards, and gaming utilities.">
     <meta name="theme-color" content="#070B14">
 
     <!-- Google Font: Inter -->
@@ -355,7 +356,7 @@
                         </div>
                     </div>
 
-                    <!-- Auto-Sliding Hero Popup Banner -->
+                    <!-- Auto-Sliding Hero Popup Banner (62% Promo Banner + 38% App Box) -->
                     <section class="px-3 pt-3">
                         <div id="heroFrame" class="relative w-full overflow-hidden rounded-2xl glass-card" style="box-shadow: var(--shadow-neon);">
                             <div id="heroTrack" class="flex w-full transition-transform duration-500 ease-out"></div>
@@ -368,7 +369,7 @@
                         <div id="spotlightBar"></div>
                     </section>
 
-                    <!-- Shelf 1: Discover Apps (4+ compact cards side-by-side) -->
+                    <!-- Shelf 1: Discover Apps (4+ compact 76px cards side-by-side) -->
                     <section class="pt-4">
                         <div class="flex items-center justify-between px-3.5 pb-2">
                             <div class="flex items-center gap-2 min-w-0">
@@ -398,7 +399,7 @@
                         <div id="rowPopular" class="flex gap-2 overflow-x-auto no-scrollbar px-3.5 pb-1"></div>
                     </section>
 
-                    <!-- Shelf 3: Upcoming Apps (Pre-register toggle) -->
+                    <!-- Shelf 3: Upcoming Apps (SOON badge + Upcoming / Registered toggle) -->
                     <section class="pt-4">
                         <div class="flex items-center justify-between px-3.5 pb-2">
                             <div class="flex items-center gap-2 min-w-0">
@@ -851,7 +852,7 @@
                         </div>
                     </div>
 
-                    <!-- Primary Inline 1% -> 100% CTA Button -->
+                    <!-- Primary Inline CTA Button (Install ONLY for live apps; Upcoming / Registered toggle for upcoming apps) -->
                     <div id="dtActionSlot"></div>
 
                     <!-- Play Store-Style App Preview & Screenshots Carousel -->
@@ -1000,7 +1001,7 @@
                             <!-- Welcome Banner + Live Firebase Sync Pill -->
                             <div class="glass-card rounded-2xl p-3.5 border-cyan-400/35 bg-gradient-to-r from-cyan-500/15 via-sky-500/10 to-emerald-500/15 flex items-center justify-between gap-2">
                                 <div class="min-w-0">
-                                    <div class="text-[10.5px] font-extrabold uppercase tracking-wider text-cyan-400">AM Store OS • Live</div>
+                                    <div class="text-[10.5px] font-extrabold uppercase tracking-wider text-cyan-400">AM Store OS v1.0 • Live</div>
                                     <h4 class="text-[16px] font-black truncate mt-0.5">Welcome back, Meraj!</h4>
                                     <p class="text-[11px] text-slate-300 truncate mt-0.5">Control apps, hero banners, updates &amp; security</p>
                                 </div>
@@ -1071,7 +1072,7 @@
                             <div class="glass-card rounded-2xl p-3.5 space-y-2">
                                 <div class="text-[12px] font-extrabold text-cyan-400">📢 Store Announcement Notice</div>
                                 <div class="flex gap-2">
-                                    <input id="admHomeNoticeInput" type="text" placeholder="e.g. AM Voice Prank v1.2 is live now!"
+                                    <input id="admHomeNoticeInput" type="text" placeholder="e.g. AM Voice Prank v1.0 is live now!"
                                            class="flex-1 px-3 py-2 rounded-xl theme-input text-[12px] font-semibold">
                                     <button onclick="saveStoreNoticeFromHome()"
                                             class="px-3.5 py-2 rounded-xl neon-grad text-slate-950 text-[11.5px] font-black flex-shrink-0 active:scale-95 transition">
@@ -1232,7 +1233,7 @@
                             </div>
                             <div>
                                 <label class="block text-[11px] font-bold text-slate-400 mb-1">Latest Version (updateVer)</label>
-                                <input id="admVpVer" type="text" placeholder="1.1" class="w-full px-3 py-2.5 rounded-xl theme-input text-[12.5px] font-bold">
+                                <input id="admVpVer" type="text" placeholder="1.0" class="w-full px-3 py-2.5 rounded-xl theme-input text-[12.5px] font-bold">
                             </div>
                             <div>
                                 <label class="block text-[11px] font-bold text-slate-400 mb-1">Direct APK Download URL (updateUrl)</label>
@@ -1311,6 +1312,16 @@
             PREFS: "am_store_prefs"
         };
 
+        // Retired demo IDs so older Firebase entries never resurface
+        const RETIRED_DEMO_IDS = new Set([
+            "am-audio-booster",
+            "am-ping-dns-helper",
+            "am-screen-crosshair",
+            "free-fire-max-official",
+            "am-game-recorder-pro",
+            "am-custom-macro"
+        ]);
+
         /**
          * Builds a crisp 9:16 vertical phone-frame UI preview screenshot as a
          * UTF-8 encoded SVG data URI (no base64, zero external dependencies).
@@ -1324,7 +1335,7 @@
                     <text x="52" y="${y + 27}" text-anchor="middle" fill="#22D3EE" font-family="Inter,sans-serif" font-size="11" font-weight="800">${idx + 1}</text>
                     <text x="72" y="${y + 27}" fill="#F8FAFC" font-family="Inter,sans-serif" font-size="12" font-weight="700">${label}</text>
                     <rect x="192" y="${y + 13}" width="38" height="20" rx="10" fill="${c1}"/>
-                    <text x="211" y="${y + 26.5}" text-anchor="middle" fill="#070B14" font-family="Inter,sans-serif" font-size="9" font-weight="900">PLAY</text>
+                    <text x="211" y="${y + 26.5}" text-anchor="middle" fill="#070B14" font-family="Inter,sans-serif" font-size="9" font-weight="900">AM</text>
                 `;
             }).join("");
 
@@ -1356,7 +1367,7 @@
             return "data:image/svg+xml;utf8," + encodeURIComponent(svg);
         }
 
-        // Default Apps Catalog (Pre-populated with 3 crisp 9:16 screenshots per app)
+        // Default Apps Catalog: 1 Live App (AM Voice Prank) + 5 Distinct Upcoming Apps (Zero Install Buttons)
         const DEFAULT_APPS = [
             {
                 id: "am-voice-prank",
@@ -1374,11 +1385,11 @@
                 iconUrl: "",
                 downloadUrl: "#",
                 taglineEn: "Floating game voice soundboard with Bangla & English support",
-                taglineBn: "গেমে লাইভ ফ্লোটিং ভয়েস সাউন্ডবোর্ড — বাংলা ও ইংলিশ সাপোর্টসহ",
+                taglineBn: "গেমে লাইভ ফ্লোটিং ভয়েস সাউন্ডবোর্ড — বাংলা ও ইংলিশ সাপোর্টসহ",
                 changelogEn: "Added floating logo bubble, top-bar stop button, and instant Bangla/English switch.",
-                changelogBn: "ফ্লোটিং লোগো বাবল, ওপরের বারে স্টপ বাটন এবং সম্পূর্ণ বাংলা ও ইংলিশ ভাষা যুক্ত করা হয়েছে।",
+                changelogBn: "ফ্লোটিং লোগো বাবল, ওপরের বারে স্টপ বাটন এবং সম্পূর্ণ বাংলা ও ইংলিশ ভাষা যুক্ত করা হয়েছে।",
                 descEn: "AM Voice Prank lets you play custom prank audio clips live over Free Fire and any Android game using a sleek floating logo overlay, one-tap max volume boost, and custom MP3 cards.",
-                descBn: "AM Voice Prank দিয়ে ফ্রি ফায়ারসহ যেকোনো গেম খেলার সময় ফ্লোটিং লোগো বাবল থেকে সরাসরি কাস্টম প্র্যাঙ্ক ভয়েস বাজানো যায়। এতে রয়েছে ওয়ান-ট্যাপ ভলিউম বুস্ট ও কাস্টম MP3 কার্ড।",
+                descBn: "AM Voice Prank দিয়ে ফ্রি ফায়ারসহ যেকোনো গেম খেলার সময় ফ্লোটিং লোগো বাবল থেকে সরাসরি কাস্টম প্র্যাঙ্ক ভয়েস বাজানো যায়। এতে রয়েছে ওয়ান-ট্যাপ ভলিউম বুস্ট ও কাস্টম MP3 কার্ড।",
                 colors: ["#22D3EE", "#0284C7", "#10B981"],
                 glyph: "🎙️",
                 badge: "VOICE",
@@ -1389,133 +1400,133 @@
                 ]
             },
             {
-                id: "am-audio-booster",
-                name: "AM Audio Booster",
+                id: "am-soundboard-fx",
+                name: "AM Soundboard FX",
                 developer: "AM Official Studio",
                 category: "Soundboard",
-                version: "1.1",
-                size: "5.4 MB",
-                rating: "4.8",
+                version: "Soon",
+                size: "Upcoming",
+                rating: "Soon",
                 android: "7.0+",
-                status: "live",
+                status: "upcoming",
                 linkType: "apk",
                 popularRank: 2,
                 heroFeatured: true,
                 iconUrl: "",
                 downloadUrl: "#",
-                taglineEn: "Crystal-clear speaker & prank clip loudness enhancer",
-                taglineBn: "প্র্যাঙ্ক অডিও ও স্পিকার সাউন্ড পরিষ্কার ও জোরালো করার টুল",
-                changelogEn: "Improved bass clarity and added one-tap preset profiles for voice clips.",
-                changelogBn: "ভয়েস ক্লিপের সাউন্ড ক্লিয়ারিটি বাড়ানো হয়েছে এবং ওয়ান-ট্যাপ প্রিসেট যুক্ত হয়েছে।",
-                descEn: "Lightweight audio clarity and loudness enhancer built to make voice clips and gaming sound effects crisp without distortion.",
-                descBn: "ভয়েস ক্লিপ ও গেমিং সাউন্ড ইফেক্ট কোনো নয়েজ ছাড়াই আরও পরিষ্কার ও জোরালো করার হালকা অডিও ইউটিলিটি অ্যাপ।",
-                colors: ["#0284C7", "#1E1B4B", "#38BDF8"],
-                glyph: "🔊",
-                badge: "AUDIO",
+                taglineEn: "Viral meme drops, echo FX filters & instant reaction sound pads",
+                taglineBn: "ভাইরাল মিম সাউন্ড, ইকো ফিল্টার ও ইনস্ট্যান্ট রিঅ্যাকশন প্যাড",
+                changelogEn: "Currently in studio development — tap Upcoming to pre-register for launch day.",
+                changelogBn: "স্টুডিও ডেভেলপমেন্ট চলছে — রিলিজের দিন জানতে Upcoming চাপুন।",
+                descEn: "AM Soundboard FX brings 50+ viral meme clips, real-time echo and pitch FX sliders, and custom MP3 sound pads built for squad chats and content creators.",
+                descBn: "AM Soundboard FX-এ থাকছে ৫০+ ভাইরাল মিম ক্লিপ, রিয়েল-টাইম ইকো ও পিচ ইফেক্ট এবং কাস্টম MP3 সাউন্ড প্যাড।",
+                colors: ["#06B6D4", "#1E3A8A", "#38BDF8"],
+                glyph: "🎛️",
+                badge: "FX",
                 screenshots: [
-                    makePhoneScreenshotUri("Audio Booster", "Crystal Voice Clarity", "#38BDF8", "#172554", ["Voice Clarity +35%", "Clean Bass Enhancer", "Anti-Distortion Guard", "Quick Floating Tile"]),
-                    makePhoneScreenshotUri("Sound Presets", "One-Tap Gaming Modes", "#22D3EE", "#0F172A", ["Mic & Speaker Mode", "Footstep Crisp EQ", "Prank Clip Loudness", "Battery Saver DSP"]),
-                    makePhoneScreenshotUri("Live Equalizer", "Real-Time Waveform", "#10B981", "#06282D", ["5-Band Neon EQ", "Auto Headset Detect", "Zero Background Drain", "Verified AM Build"])
+                    makePhoneScreenshotUri("AM Soundboard FX", "Neon Reaction Sound Pads", "#06B6D4", "#1E3A8A", ["50+ Viral Meme Drops", "Echo & Reverb FX", "Instant Loop Pads", "Zero Latency Trigger"]),
+                    makePhoneScreenshotUri("Creator Studio", "Custom Sound Packs", "#38BDF8", "#0F172A", ["Import Custom MP3s", "Color-Coded Pad Grid", "Favorites Quick Bar", "Coming Soon to AM"]),
+                    makePhoneScreenshotUri("Clean Audio DSP", "Zero Background Drain", "#22D3EE", "#082F49", ["Crisp Speaker Output", "One-Tap Mute Toggle", "Offline Sound Cache", "AM Official Build"])
                 ]
             },
             {
-                id: "am-ping-dns-helper",
-                name: "AM Ping & DNS Helper",
+                id: "am-craftland-hub",
+                name: "AM Craftland Hub",
                 developer: "AM Official Studio",
                 category: "Gaming Tools",
-                version: "1.2",
-                size: "6.1 MB",
-                rating: "4.8",
-                android: "8.0+",
-                status: "live",
+                version: "Soon",
+                size: "Upcoming",
+                rating: "Soon",
+                android: "7.0+",
+                status: "upcoming",
                 linkType: "apk",
                 popularRank: 3,
                 heroFeatured: true,
                 iconUrl: "",
                 downloadUrl: "#",
-                taglineEn: "Live network ping monitor & fast DNS latency tester",
-                taglineBn: "লাইভ নেটওয়ার্ক পিং মনিটর ও ফাস্ট DNS ল্যাটেন্সি টেস্টার",
-                changelogEn: "Added real-time ping graph and instant DNS speed benchmark.",
-                changelogBn: "রিয়েল-টাইম পিং গ্রাফ এবং দ্রুত DNS স্পিড চেকার যুক্ত করা হয়েছে।",
-                descEn: "Monitor live server ping stability and test clean DNS routes before starting competitive matches. Zero game file modification.",
-                descBn: "গেম শুরু করার আগে লাইভ নেটওয়ার্ক পিং স্থিতিশীলতা এবং দ্রুত DNS রুট চেক করার নিরাপদ গেমিং টুল।",
-                colors: ["#0EA5E9", "#0F172A", "#10B981"],
-                glyph: "⚡",
-                badge: "PING",
+                taglineEn: "Curated custom map codes, 1v1 training arenas & squad guides",
+                taglineBn: "কাস্টম ম্যাপ কোড, ১v১ ট্রেনিং এরিনা ও স্কোয়াড গাইড হাব",
+                changelogEn: "Curating verified map codes — pre-register to get notified on launch.",
+                changelogBn: "ভেরিফায়েড ম্যাপ কোড সাজানো হচ্ছে — রিলিজ অ্যালার্ট পেতে প্রি-রেজিস্টার করুন।",
+                descEn: "Discover verified Craftland custom map codes, fast 1v1 aim arenas, parkour challenges, and saved character skill combination notes with one-tap copy.",
+                descBn: "এক ট্যাপে কপি করার সুবিধাসহ সেরা ক্রাফটল্যান্ড কাস্টম ম্যাপ কোড, ১v১ ট্রেনিং এরিনা ও স্কিল কম্বিনেশন গাইড।",
+                colors: ["#10B981", "#064E3B", "#34D399"],
+                glyph: "🗺️",
+                badge: "MAPS",
                 screenshots: [
-                    makePhoneScreenshotUri("Ping & DNS", "Live Latency Monitor", "#22D3EE", "#082F49", ["Live Ping: 24 ms", "Jitter Stability Check", "4G / Wi-Fi Analyzer", "Pre-Match Speed Test"]),
-                    makePhoneScreenshotUri("DNS Benchmark", "Fastest Route Finder", "#10B981", "#052E2B", ["Cloudflare 1.1.1.1", "Google 8.8.8.8", "Quad9 Secure DNS", "One-Tap Latency Scan"]),
-                    makePhoneScreenshotUri("Safe Utility", "No Game File Edits", "#38BDF8", "#0F172A", ["100% Account Safe", "Floating Ping Pill", "Packet Loss Alert", "Lightweight 6 MB"])
+                    makePhoneScreenshotUri("AM Craftland Hub", "Tactical Custom Map Codes", "#10B981", "#064E3B", ["1v1 Fast Aim Arena", "Unlimited Room Codes", "Fun Parkour Runs", "One-Tap Code Copy"]),
+                    makePhoneScreenshotUri("Squad Loadouts", "Pro Skill Combinations", "#34D399", "#052E2B", ["Rusher Skill Notes", "Sniper Support Build", "Custom HUD Layouts", "100% Account Safe"]),
+                    makePhoneScreenshotUri("Daily Map Drops", "Verified Community Codes", "#10B981", "#0F172A", ["Instant Search Filter", "Bookmark Top Maps", "Zero Game File Edits", "Coming Soon to AM"])
                 ]
             },
             {
-                id: "am-screen-crosshair",
-                name: "AM Screen Crosshair",
+                id: "am-dark-walls-4k",
+                name: "AM Dark Walls 4K",
                 developer: "AM Official Studio",
-                category: "Utilities",
-                version: "1.0",
-                size: "4.6 MB",
-                rating: "4.7",
+                category: "Entertainment",
+                version: "Soon",
+                size: "Upcoming",
+                rating: "Soon",
                 android: "7.0+",
-                status: "live",
+                status: "upcoming",
                 linkType: "apk",
                 popularRank: 4,
                 heroFeatured: false,
                 iconUrl: "",
                 downloadUrl: "#",
-                taglineEn: "Customizable center-screen visual aim dot utility",
-                taglineBn: "নিজের পছন্দমতো রঙ ও সাইজের সেন্টার স্ক্রিন ডট ইউটিলিটি",
-                changelogEn: "Initial release with 15+ neon crosshair styles and opacity slider.",
-                changelogBn: "১৫+ নিয়ন ক্রসহেয়ার স্টাইল ও অপাসিটি কন্ট্রোলসহ প্রথম রিলিজ।",
-                descEn: "Clean visual screen overlay utility with custom neon colors, size slider, and quick toggle.",
-                descBn: "কাস্টম নিয়ন রঙ, সাইজ স্লাইডার এবং কুইক টগলসহ পরিষ্কার ভিজ্যুয়াল স্ক্রিন ইউটিলিটি।",
-                colors: ["#0891B2", "#0F172A", "#22D3EE"],
-                glyph: "🎯",
-                badge: "UTIL",
+                taglineEn: "True AMOLED pitch-black, neon cyber & minimal 4K wallpapers",
+                taglineBn: "AMOLED পিচ-ব্ল্যাক, নিয়ন সাইবার ও মিনিমাল ৪কে ওয়ালপেপার",
+                changelogEn: "Preparing 4K gallery packs — tap Upcoming to get launch alert.",
+                changelogBn: "৪কে গ্যালারি প্যাক তৈরি হচ্ছে — লঞ্চ অ্যালার্ট পেতে Upcoming চাপুন।",
+                descEn: "Handpicked ultra-crisp 4K AMOLED dark wallpapers engineered to save battery while giving your home and lock screen a sleek neon aesthetic.",
+                descBn: "ব্যাটারি সাশ্রয়ী প্রিমিয়াম ৪কে AMOLED ডার্ক ও নিয়ন ওয়ালপেপার কালেকশন, যা আপনার ফোনকে দেবে চমৎকার লুক।",
+                colors: ["#8B5CF6", "#1E1B4B", "#C084FC"],
+                glyph: "🖼️",
+                badge: "4K",
                 screenshots: [
-                    makePhoneScreenshotUri("Screen Crosshair", "15+ Neon Aim Styles", "#22D3EE", "#083344", ["Cyan Precision Dot", "Emerald Pro Cross", "Dynamic Scope Ring", "Custom RGB Picker"]),
-                    makePhoneScreenshotUri("Position Tuner", "Pixel-Level Alignment", "#38BDF8", "#0F172A", ["X / Y Micro Nudges", "Size & Opacity Slider", "Quick Hide Shortcut", "Zero Touch Blocking"]),
-                    makePhoneScreenshotUri("Clean Overlay", "Android 7 to 15 Ready", "#10B981", "#06282D", ["Ultra-Low RAM Usage", "Instant Toggle Widget", "No Ads or Trackers", "AM Verified Build"])
+                    makePhoneScreenshotUri("AM Dark Walls 4K", "True AMOLED Collection", "#8B5CF6", "#1E1B4B", ["Pitch-Black 4K Art", "Neon Cyber Series", "Minimal Dark Gradients", "One-Tap Apply"]),
+                    makePhoneScreenshotUri("Lock & Home Preview", "Crisp 2160p Resolution", "#C084FC", "#231042", ["Battery-Saving Blacks", "Zero Watermark Export", "Offline Favorites Vault", "Coming Soon to AM"]),
+                    makePhoneScreenshotUri("Curated Drops", "Fresh Weekly Packs", "#8B5CF6", "#0F172A", ["Fast Thumbnail Cache", "Auto-Fit Screen Size", "No Clutter Interface", "AM Official Studio"])
                 ]
             },
             {
-                id: "free-fire-max-official",
-                name: "Free Fire MAX",
-                developer: "Garena International I",
+                id: "am-net-ping-monitor",
+                name: "AM Net Ping Monitor",
+                developer: "AM Official Studio",
                 category: "Gaming Tools",
-                version: "Official",
-                size: "Play Store",
-                rating: "4.6",
-                android: "5.0+",
-                status: "live",
-                linkType: "official",
+                version: "Soon",
+                size: "Upcoming",
+                rating: "Soon",
+                android: "8.0+",
+                status: "upcoming",
+                linkType: "apk",
                 popularRank: 5,
                 heroFeatured: false,
                 iconUrl: "",
-                downloadUrl: "https://play.google.com/store/apps/details?id=com.dts.freefiremax",
-                taglineEn: "Official Google Play Store link — pair with AM Voice Prank",
-                taglineBn: "অফিশিয়াল Google Play Store লিংক — AM Voice Prank-এর সাথে খেলুন",
-                changelogEn: "Direct official store redirect for safe, verified installation.",
-                changelogBn: "নিরাপদ ইনস্টলেশনের জন্য সরাসরি অফিশিয়াল প্লে স্টোর লিংক।",
-                descEn: "Official Google Play Store redirect. AM App Store never re-hosts third-party APKs—tap Official Link to open Google Play safely.",
-                descBn: "অফিশিয়াল Google Play Store লিংক। কপিরাইট ও নিরাপত্তার জন্য সরাসরি মূল ডেভেলপারের প্লে স্টোর পেজ ওপেন হবে।",
-                colors: ["#EA580C", "#1E1B4B", "#F59E0B"],
-                glyph: "🔥",
-                badge: "PLAY",
+                downloadUrl: "#",
+                taglineEn: "Live floating network ping pill, jitter & Wi-Fi/4G stability meter",
+                taglineBn: "লাইভ ফ্লোটিং নেটওয়ার্ক পিং পিল ও Wi-Fi/4G স্থিতিশীলতা মিটার",
+                changelogEn: "Testing real-time latency engine — pre-register for launch day.",
+                changelogBn: "রিয়েল-টাইম ল্যাটেন্সি ইঞ্জিন টেস্টিং চলছে — রিলিজের দিন জানতে প্রি-রেজিস্টার করুন।",
+                descEn: "Monitor real-time network ping stability, packet jitter, and 4G/Wi-Fi signal consistency with a clean floating pill before and during matches.",
+                descBn: "ম্যাচ শুরুর আগে ও চলাকালীন লাইভ নেটওয়ার্ক পিং স্থিতিশীলতা ও Wi-Fi/4G সিগন্যাল দেখার হালকা ফ্লোটিং ইউটিলিটি।",
+                colors: ["#F59E0B", "#451A03", "#FBBF24"],
+                glyph: "📡",
+                badge: "PING",
                 screenshots: [
-                    makePhoneScreenshotUri("Free Fire MAX", "Official Google Play Link", "#F59E0B", "#2A1508", ["Direct Play Store Redirect", "Safe Official Updates", "Pair with Voice Prank", "100% Copyright Compliant"]),
-                    makePhoneScreenshotUri("Squad Voice Fun", "Use AM Floating Bubble", "#22D3EE", "#0F172A", ["Launch AM Voice Prank", "Open Free Fire MAX", "Tap Bubble in Lobby", "Prank Your Teammates"]),
-                    makePhoneScreenshotUri("Verified Store", "Zero Third-Party APKs", "#10B981", "#06282D", ["Official Store Redirect", "Full Google Play Safety", "Instant Updates", "AM App Store Curated"])
+                    makePhoneScreenshotUri("AM Net Ping", "Live Latency Pill", "#F59E0B", "#451A03", ["Real-Time Ping: 22 ms", "Jitter Stability Graph", "4G / Wi-Fi Analyzer", "Pre-Match Speed Check"]),
+                    makePhoneScreenshotUri("Floating Pill UI", "Non-Intrusive Corner Tag", "#FBBF24", "#2A1508", ["Custom Pill Opacity", "Packet Loss Alert", "Battery Friendly Engine", "Coming Soon to AM"]),
+                    makePhoneScreenshotUri("100% Policy Safe", "Pure Network Utility", "#F59E0B", "#0F172A", ["Zero Game File Edits", "Lightweight Under 5MB", "One-Tap Toggle Tile", "AM Official Build"])
                 ]
             },
             {
-                id: "am-game-recorder-pro",
-                name: "AM Game Recorder Pro",
+                id: "am-quick-macro-hud",
+                name: "AM Quick Macro HUD",
                 developer: "AM Official Studio",
-                category: "Gaming Tools",
-                version: "1.0",
-                size: "7.8 MB",
-                rating: "New",
+                category: "Utilities",
+                version: "Soon",
+                size: "Upcoming",
+                rating: "Soon",
                 android: "8.0+",
                 status: "upcoming",
                 linkType: "apk",
@@ -1523,46 +1534,19 @@
                 heroFeatured: false,
                 iconUrl: "",
                 downloadUrl: "#",
-                taglineEn: "Lag-free 60FPS internal audio gameplay recorder",
-                taglineBn: "ল্যাগ ছাড়াই ইন্টারনাল অডিওসহ ৬০FPS গেমপ্লে রেকর্ডার",
-                changelogEn: "Currently in final testing — pre-register for launch notification.",
-                changelogBn: "ফাইনাল টেস্টিং চলছে — রিলিজের দিন জানতে প্রি-রেজিস্টার করুন।",
-                descEn: "Record smooth 60FPS gameplay with internal game audio and prank voice capture without frame drops.",
-                descBn: "ফ্রেম ড্রপ ছাড়াই ইন্টারনাল গেম অডিও ও প্র্যাঙ্ক ভয়েসসহ স্মুথ ৬০FPS গেমপ্লে রেকর্ড করার আসন্ন অ্যাপ।",
-                colors: ["#7C3AED", "#1E1B4B", "#EC4899"],
-                glyph: "🎥",
-                badge: "REC",
-                screenshots: [
-                    makePhoneScreenshotUri("Game Recorder Pro", "60FPS Internal Audio", "#A855F7", "#231042", ["1080p 60FPS Capture", "Internal + Mic Audio", "No Watermark Export", "Floating Pause Pill"]),
-                    makePhoneScreenshotUri("Zero Frame Drop", "Hardware Encoder Mode", "#EC4899", "#2B0D24", ["Low-RAM Optimization", "Instant Highlight Clip", "Custom Bitrate Slider", "Coming Soon to AM"])
-                ]
-            },
-            {
-                id: "am-custom-macro",
-                name: "AM Custom Macro",
-                developer: "AM Official Studio",
-                category: "Utilities",
-                version: "1.0",
-                size: "5.0 MB",
-                rating: "New",
-                android: "8.0+",
-                status: "upcoming",
-                linkType: "apk",
-                popularRank: 7,
-                heroFeatured: false,
-                iconUrl: "",
-                downloadUrl: "#",
-                taglineEn: "Quick floating shortcut bar & custom HUD layout notes",
-                taglineBn: "কুইক ফ্লোটিং শর্টকাট বার ও কাস্টম HUD লেআউট নোটস",
-                changelogEn: "Upcoming utility — pre-register now to get early access.",
-                changelogBn: "শীঘ্রই আসছে — আর্লি অ্যাক্সেস পেতে এখনই প্রি-রেজিস্টার করুন।",
-                descEn: "Organize quick screen shortcuts, DND triggers, and finger-claw HUD layout guides in a lightweight floating panel.",
-                descBn: "একটি হালকা ফ্লোটিং প্যানেলে কুইক শর্টকাট, DND টগল এবং ২/৩/৪-ফিঙ্গার HUD গাইড গুছিয়ে রাখার আসন্ন অ্যাপ।",
-                colors: ["#6366F1", "#0F172A", "#38BDF8"],
+                taglineEn: "Floating quick-action dock, DND trigger & 3/4-finger HUD layouts",
+                taglineBn: "ফ্লোটিং কুইক-অ্যাকশন ডক, DND ট্রিগার ও ৩/৪-ফিঙ্গার HUD লেআউট",
+                changelogEn: "Finalizing floating dock & HUD notes — tap Upcoming to pre-register.",
+                changelogBn: "ফ্লোটিং ডক ও HUD নোটস চূড়ান্ত হচ্ছে — প্রি-রেজিস্টার করতে Upcoming চাপুন।",
+                descEn: "Organize quick screen shortcuts, one-tap Do Not Disturb focus mode, and 2/3/4-finger claw HUD layout reference cards in a lightweight floating bar.",
+                descBn: "একটি হালকা ফ্লোটিং বারে কুইক শর্টকাট, ওয়ান-ট্যাপ DND মোড এবং ২/৩/৪-ফিঙ্গার HUD লেআউট গাইড গুছিয়ে রাখার অ্যাপ।",
+                colors: ["#F43F5E", "#4C0519", "#FB7185"],
                 glyph: "🕹️",
                 badge: "HUD",
                 screenshots: [
-                    makePhoneScreenshotUri("AM Custom HUD", "3 & 4 Finger Claw Layouts", "#38BDF8", "#161E3B", ["Pro HUD Layout Notes", "One-Tap DND Mode", "Quick Floating Dock", "Pre-Register Today"])
+                    makePhoneScreenshotUri("AM Quick HUD", "3 & 4 Finger Claw Layouts", "#F43F5E", "#4C0519", ["Pro HUD Layout Cards", "One-Tap DND Focus", "Quick Floating Dock", "Pre-Register Today"]),
+                    makePhoneScreenshotUri("Smart Shortcuts", "Fast One-Hand Controls", "#FB7185", "#2B0D24", ["Screen Brightness Lock", "Quick App Switcher", "Custom Button Opacity", "Coming Soon to AM"]),
+                    makePhoneScreenshotUri("Clean & Safe", "Android 8 to 15 Ready", "#F43F5E", "#0F172A", ["Ultra-Low RAM Usage", "No Root Required", "Zero Game File Mods", "AM Official Studio"])
                 ]
             }
         ];
@@ -1599,11 +1583,11 @@
                 btnInstalled: "Installed",
                 btnUpdate: "Update",
                 btnOfficial: "Official Link",
-                btnPreReg: "Pre-register",
+                btnPreReg: "Upcoming",
                 btnRegistered: "Registered ✓",
                 btnDetails: "Details",
                 spotSafeTitle: "100% Safe & Official AM Releases",
-                spotSafeSub: "Verified APKs & Official Store Links • Live Synced",
+                spotSafeSub: "Verified APKs & Official Roadmap • Live Synced",
                 spotUpdTitle: (n) => `${n} New Update${n > 1 ? "s" : ""} Available!`,
                 spotUpdSub: (name, v) => `Update ${name} to v${v} now`,
                 updatesHeading: "🔄 App Updates",
@@ -1682,12 +1666,12 @@
                 bnMe: "আমি",
                 searchHeading: "সার্চ ফলাফল",
                 close: "বন্ধ করুন",
-                noApps: "কোনো অ্যাপ পাওয়া যায়নি।",
+                noApps: "কোনো অ্যাপ পাওয়া যায়নি।",
                 discoverTitle: "অ্যাপস এক্সপ্লোর করুন",
-                popularTitle: "জনপ্রিয় অ্যাপ ও গেমস",
+                popularTitle: "জনপ্রিয় অ্যাপ ও গেমস",
                 upcomingTitle: "শীঘ্রই আসছে",
                 topHeading: "🏆 টপ অ্যাপস র‍্যাংকিং",
-                upcHeading: "🚀 শীঘ্রই আসছে (Pre-register)",
+                upcHeading: "🚀 শীঘ্রই আসছে (Upcoming)",
                 upcSub: "রিলিজ হলে জানতে প্রি-রেজিস্টার করে রাখুন।",
                 catAll: "সব",
                 catGaming: "Gaming Tools",
@@ -1698,23 +1682,23 @@
                 btnInstalled: "ইনস্টলড",
                 btnUpdate: "আপডেট",
                 btnOfficial: "Official Link",
-                btnPreReg: "প্রি-রেজিস্টার",
+                btnPreReg: "আসছে",
                 btnRegistered: "রেজিস্টার্ড ✓",
                 btnDetails: "বিস্তারিত",
-                spotSafeTitle: "১০০% নিরাপদ ও অফিশিয়াল AM রিলিজ",
-                spotSafeSub: "যাচাইকৃত APK ও অফিশিয়াল স্টোর লিংক • লাইভ সিংক",
-                spotUpdTitle: (n) => `${n}টি নতুন আপডেট পাওয়া গেছে!`,
+                spotSafeTitle: "১০০% নিরাপদ ও অফিশিয়াল AM রিলিজ",
+                spotSafeSub: "যাচাইকৃত APK ও অফিশিয়াল রোডম্যাপ • লাইভ সিংক",
+                spotUpdTitle: (n) => `${n}টি নতুন আপডেট পাওয়া গেছে!`,
                 spotUpdSub: (name, v) => `${name} v${v} এখনই আপডেট করুন`,
                 updatesHeading: "🔄 অ্যাপ আপডেটস",
                 updatesAllGood: "সব অ্যাপ আপ-টু-ডেট আছে",
-                updatesFound: (n) => `${n}টি অ্যাপের নতুন আপডেট রয়েছে`,
+                updatesFound: (n) => `${n}টি অ্যাপের নতুন আপডেট রয়েছে`,
                 checkBtn: "চেক করুন",
-                pendingKicker: "⚡ নতুন আপডেট পাওয়া গেছে",
+                pendingKicker: "⚡ নতুন আপডেট পাওয়া গেছে",
                 allLiveKicker: "📦 ইনস্টল করা ও লেটেস্ট অ্যাপস",
                 meHubSub: "Official Android Hub",
                 cloudOn: "• Cloud Connected",
                 cloudOff: "• Offline Mode",
-                shareBtn: "শেয়ার",
+                shareBtn: "শেয়ার",
                 appMgmtTitle: "অ্যাপ ম্যানেজমেন্ট",
                 quickSettings: "সেটিংস ⚙️",
                 tileUpdates: "আপডেট",
@@ -1722,15 +1706,15 @@
                 tileInstalled: "ইনস্টলড",
                 tileGuide: "ইনস্টল গাইড",
                 mgmtAllGood: "সব অ্যাপ আপ-টু-ডেট আছে",
-                mgmtUpdAvail: (n) => `${n}টি অ্যাপের আপডেট পাওয়া গেছে`,
+                mgmtUpdAvail: (n) => `${n}টি অ্যাপের আপডেট পাওয়া গেছে`,
                 preRegRowTitle: "প্রি-রেজিস্টার্ড অ্যাপস",
                 helpTitle: "কোনো সমস্যা হচ্ছে? যোগাযোগ করুন!",
                 helpSub: "AM টিম থেকে দ্রুত সাপোর্ট নিন",
-                tgTitle: "অফিশিয়াল টেলিগ্রাম চ্যানেল",
-                tgSub: "নতুন অ্যাপ ও আপডেট পেতে জয়েন করুন",
+                tgTitle: "অফিশিয়াল টেলিগ্রাম চ্যানেল",
+                tgSub: "নতুন অ্যাপ ও আপডেট পেতে জয়েন করুন",
                 setModalTitle: "⚙️ স্টোর সেটিংস",
-                setGrp1: "অ্যাপিয়ারেন্স ও ভাষা",
-                setDarkMode: "ডার্ক নিয়ন মোড",
+                setGrp1: "অ্যাপিয়ারেন্স ও ভাষা",
+                setDarkMode: "ডার্ক নিয়ন মোড",
                 setLightMode: "লাইট মোড",
                 setLang: "ভাষা / Language",
                 setLangVal: "বাংলা / English",
@@ -1740,7 +1724,7 @@
                 prefSound: "ডাউনলোড কমপ্লিট সাউন্ড",
                 prefSoundSub: "১০০% হলে মিষ্টি নোটিফিকেশন টোন বাজবে",
                 prefTip: "Android 14/15 ইনস্টল গাইড",
-                prefTipSub: "Restricted Settings ওভারলে আনলক করার নিয়ম",
+                prefTipSub: "Restricted Settings ওভারলে আনলক করার নিয়ম",
                 setGrp3: "ক্লাউড ও স্টোরেজ",
                 setSyncNow: "🔄 ক্লাউডের সাথে এখনই সিংক করুন",
                 setClearCache: "🗑️ লোকাল ক্যাশ রিসেট করুন",
@@ -1755,19 +1739,19 @@
                 dtSize: "সাইজ",
                 dtVersion: "ভার্সন",
                 dtScreenshots: "📱 অ্যাপ প্রিভিউ ও স্ক্রিনশট",
-                dtTapZoom: "বড় করে দেখতে ট্যাপ করুন",
+                dtTapZoom: "বড় করে দেখতে ট্যাপ করুন",
                 dtChangelog: "✨ নতুন কী আছে",
                 dtAbout: "অ্যাপ সম্পর্কে",
-                tCopied: "✓ AM App Store লিংক কপি হয়েছে!",
-                tPreRegOn: "✓ প্রি-রেজিস্টার সম্পন্ন হয়েছে!",
-                tPreRegOff: "প্রি-রেজিস্টার বাতিল করা হয়েছে",
+                tCopied: "✓ AM App Store লিংক কপি হয়েছে!",
+                tPreRegOn: "✓ প্রি-রেজিস্টার সম্পন্ন হয়েছে!",
+                tPreRegOff: "প্রি-রেজিস্টার বাতিল করা হয়েছে",
                 tSyncing: "🔄 ক্লাউড থেকে সিংক হচ্ছে...",
-                tSynced: "✓ লেটেস্ট ডেটার সাথে সিংক হয়েছে!",
+                tSynced: "✓ লেটেস্ট ডেটার সাথে সিংক হয়েছে!",
                 tOffline: "⚠️ অফলাইন মোড — সংরক্ষিত ডেটা দেখানো হচ্ছে",
-                tCacheCleared: "✓ লোকাল ক্যাশ ও হিস্টোরি পরিষ্কার হয়েছে!",
+                tCacheCleared: "✓ লোকাল ক্যাশ ও হিস্টোরি পরিষ্কার হয়েছে!",
                 tDlDone: "✓ ডাউনলোড সম্পন্ন! APK ফাইলে ট্যাপ করে ইনস্টল করুন।",
                 tPreviewUrl: "ℹ️ প্রিভিউ মোড: অ্যাডমিন প্যানেল থেকে আসল APK লিংক যোগ করুন।",
-                tOfficialOpen: "↗ অফিশিয়াল Play Store ওপেন হচ্ছে..."
+                tOfficialOpen: "↗ অফিশিয়াল Play Store ওপেন হচ্ছে..."
             }
         };
 
@@ -1996,12 +1980,28 @@
         }
 
         // =====================================================================
-        // 5. PLAY STORE-STYLE INLINE 1% -> 100% PROGRESS BUTTONS
+        // 5. ACTION PILLS (INSTALL FOR LIVE APPS; UPCOMING / REGISTERED PILL ONLY)
         // =====================================================================
         function getActionBtnMeta(app, size) {
             const t = I18N[lang];
             const st = getAppState(app);
             const dl = activeDownloads[app.id];
+
+            // STRICT GUARD: Upcoming apps NEVER render an Install button
+            if (st.kind === "registered") {
+                return {
+                    cls: "bg-emerald-500/15 border border-emerald-500/45 text-emerald-500 dark:text-emerald-400",
+                    label: t.btnRegistered,
+                    pct: 0
+                };
+            }
+            if (st.kind === "upcoming") {
+                return {
+                    cls: "bg-violet-500/15 border border-violet-400/50 text-violet-500 dark:text-violet-300",
+                    label: t.btnPreReg,
+                    pct: 0
+                };
+            }
 
             if (dl) {
                 const lbl = size === "lg" ? `Downloading ${dl.pct}%` : `${dl.pct}%`;
@@ -2022,20 +2022,6 @@
                 return {
                     cls: "bg-sky-500/15 border border-sky-400/50 text-sky-500 dark:text-sky-400",
                     label: size === "lg" ? `${t.btnOfficial} ↗` : t.btnOfficial,
-                    pct: 0
-                };
-            }
-            if (st.kind === "registered") {
-                return {
-                    cls: "bg-emerald-500/15 border border-emerald-500/45 text-emerald-500 dark:text-emerald-400",
-                    label: t.btnRegistered,
-                    pct: 0
-                };
-            }
-            if (st.kind === "upcoming") {
-                return {
-                    cls: "bg-violet-500/15 border border-violet-400/50 text-violet-500 dark:text-violet-300",
-                    label: t.btnPreReg,
                     pct: 0
                 };
             }
@@ -2090,6 +2076,7 @@
             if (!app) return;
             const t = I18N[lang];
 
+            // Upcoming apps toggle pre-registration alert — NEVER triggers download/install
             if (app.status === "upcoming") {
                 const reg = readStorage(STORAGE.REGISTERED, {});
                 if (reg[app.id]) {
@@ -2186,8 +2173,15 @@
 
             track.innerHTML = heroSlides.map((app, i) => {
                 const st = getAppState(app);
-                const badgeTxt = st.kind === "update" ? "NEW UPDATE" : "FEATURED";
+                const isUpcoming = app.status === "upcoming";
+                const badgeTxt = isUpcoming ? "COMING SOON" : (st.kind === "update" ? "NEW UPDATE" : "FEATURED");
                 const tagline = lang === "bn" ? (app.taglineBn || app.taglineEn) : app.taglineEn;
+                const leftMetaPills = isUpcoming
+                    ? `<span class="px-2 py-0.5 rounded-full bg-slate-950/50 text-[9.5px] font-bold">SOON</span>
+                       <span class="px-2 py-0.5 rounded-full bg-slate-950/50 text-[9.5px] font-bold">${esc(app.category)}</span>`
+                    : `<span class="px-2 py-0.5 rounded-full bg-slate-950/50 text-[9.5px] font-bold">v${esc(app.version)}</span>
+                       <span class="px-2 py-0.5 rounded-full bg-slate-950/50 text-[9.5px] font-bold">★ ${esc(app.rating)}</span>`;
+                const rightSubLabel = isUpcoming ? esc(app.category) : esc(app.size);
 
                 return `
                     <div class="w-full flex-shrink-0 flex items-stretch min-h-[146px]">
@@ -2204,23 +2198,23 @@
                                     <p class="text-[10.5px] font-medium text-slate-100/90 line-clamp-2 mt-1 leading-snug">${esc(tagline)}</p>
                                 </div>
                                 <div class="flex items-center gap-1.5">
-                                    <span class="px-2 py-0.5 rounded-full bg-slate-950/50 text-[9.5px] font-bold">v${esc(app.version)}</span>
-                                    <span class="px-2 py-0.5 rounded-full bg-slate-950/50 text-[9.5px] font-bold">★ ${esc(app.rating)}</span>
+                                    ${leftMetaPills}
                                 </div>
                             </div>
                         </div>
 
-                        <!-- Right ~38%: Rounded App Icon, Name, Size & Inline Action Button -->
+                        <!-- Right ~38%: Rounded App Icon, Name, Size/Category & Inline Action Pill -->
                         <div class="w-[38%] p-2.5 flex flex-col items-center justify-center text-center border-l border-cyan-400/20 bg-slate-900/35 dark:bg-slate-900/45">
                             <div onclick="openDetailsModal('${esc(app.id)}')"
-                                 class="w-[52px] h-[52px] rounded-2xl overflow-hidden border border-cyan-400/40 shadow-md cursor-pointer mb-1.5">
+                                 class="relative w-[52px] h-[52px] rounded-2xl overflow-hidden border border-cyan-400/40 shadow-md cursor-pointer mb-1.5">
+                                ${isUpcoming ? `<span class="absolute bottom-0.5 right-0.5 z-10 px-1 rounded bg-slate-950/85 border border-violet-400/50 text-violet-300 text-[7px] font-black">SOON</span>` : ""}
                                 ${renderAppSvgIcon(app)}
                             </div>
                             <div onclick="openDetailsModal('${esc(app.id)}')"
                                  class="w-full text-[11.5px] font-extrabold truncate cursor-pointer">
                                 ${esc(app.name)}
                             </div>
-                            <div class="text-[10px] text-slate-400 font-semibold mb-1.5">${esc(app.size)}</div>
+                            <div class="text-[10px] text-slate-400 font-semibold mb-1.5 truncate w-full">${rightSubLabel}</div>
                             ${renderActionButton(app, "sm")}
                         </div>
                     </div>
@@ -2351,9 +2345,11 @@
                 rankBadge = `<span class="absolute top-0 right-0 z-10 px-1.5 py-0.5 rounded-bl-lg bg-gradient-to-br from-amber-300 to-orange-600 text-slate-950 text-[9.5px] font-black shadow">#3</span>`;
             }
 
-            const offPill = app.linkType === "official"
-                ? `<span class="absolute bottom-1 right-1 z-10 px-1 rounded bg-slate-950/80 border border-sky-400/50 text-sky-400 text-[8px] font-black">↗</span>`
-                : "";
+            const statusPill = app.status === "upcoming"
+                ? `<span class="absolute bottom-1 right-1 z-10 px-1.5 py-0.2 rounded bg-slate-950/85 border border-violet-400/50 text-violet-300 text-[7.5px] font-black tracking-wide">SOON</span>`
+                : app.linkType === "official"
+                    ? `<span class="absolute bottom-1 right-1 z-10 px-1 rounded bg-slate-950/80 border border-sky-400/50 text-sky-400 text-[8px] font-black">↗</span>`
+                    : "";
 
             // 76px width displays 4+ compact cards side-by-side cleanly on 360px+ mobile screens
             return `
@@ -2361,7 +2357,7 @@
                     <div onclick="openDetailsModal('${esc(app.id)}')"
                          class="relative w-[64px] h-[64px] rounded-2xl overflow-hidden border border-cyan-400/30 shadow-md cursor-pointer active:scale-95 transition">
                         ${rankBadge}
-                        ${offPill}
+                        ${statusPill}
                         ${renderAppSvgIcon(app)}
                     </div>
                     <div onclick="openDetailsModal('${esc(app.id)}')"
@@ -2374,12 +2370,14 @@
         }
 
         function renderHorizontalShelves() {
-            const liveApps = appsCatalog.filter((a) => a.status !== "upcoming");
-            const popularApps = [...liveApps].sort((a, b) => (a.popularRank || 99) - (b.popularRank || 99));
+            const sortedAll = [...appsCatalog].sort((a, b) => (a.popularRank || 99) - (b.popularRank || 99));
             const upcomingApps = appsCatalog.filter((a) => a.status === "upcoming");
 
-            document.getElementById("rowDiscover").innerHTML = liveApps.map((a) => buildCompactCard(a, null)).join("");
-            document.getElementById("rowPopular").innerHTML = popularApps.map((a, i) => buildCompactCard(a, i + 1)).join("");
+            // Discover Apps: AM Voice Prank alongside the 5 upcoming apps so 4+ cards appear side-by-side
+            document.getElementById("rowDiscover").innerHTML = sortedAll.map((a) => buildCompactCard(a, null)).join("");
+            // Popular Apps & Games: AM Voice Prank at #1 (Gold) followed by top upcoming apps with #2 (Silver) and #3 (Bronze)
+            document.getElementById("rowPopular").innerHTML = sortedAll.map((a, i) => buildCompactCard(a, i + 1)).join("");
+            // Upcoming Apps: All 5 upcoming apps
             document.getElementById("rowUpcoming").innerHTML = upcomingApps.map((a) => buildCompactCard(a, null)).join("");
         }
 
@@ -2392,15 +2390,22 @@
             const rankCol = rankIndex
                 ? `<div class="w-6 text-center font-black flex-shrink-0 ${rankIndex === 1 ? "text-amber-400 text-[15px]" : rankIndex === 2 ? "text-slate-300 text-[14px]" : rankIndex === 3 ? "text-orange-400 text-[14px]" : "text-slate-500 text-[12px]"}">#${rankIndex}</div>`
                 : "";
-            const badge = app.linkType === "official"
-                ? `<span class="px-1.5 py-0.5 rounded-full bg-sky-500/15 border border-sky-400/40 text-sky-400 text-[9px] font-extrabold flex-shrink-0">Official Link</span>`
-                : `<span class="px-1.5 py-0.5 rounded-full bg-emerald-500/15 border border-emerald-500/35 text-emerald-400 text-[9px] font-extrabold flex-shrink-0">v${esc(app.version)}</span>`;
+            const badge = app.status === "upcoming"
+                ? `<span class="px-1.5 py-0.5 rounded-full bg-violet-500/15 border border-violet-400/40 text-violet-300 text-[9px] font-extrabold flex-shrink-0">SOON</span>`
+                : app.linkType === "official"
+                    ? `<span class="px-1.5 py-0.5 rounded-full bg-sky-500/15 border border-sky-400/40 text-sky-400 text-[9px] font-extrabold flex-shrink-0">Official Link</span>`
+                    : `<span class="px-1.5 py-0.5 rounded-full bg-emerald-500/15 border border-emerald-500/35 text-emerald-400 text-[9px] font-extrabold flex-shrink-0">v${esc(app.version)}</span>`;
+
+            const metaStrip = app.status === "upcoming"
+                ? `<span>SOON</span><span>•</span><span>Upcoming</span><span>•</span><span class="text-cyan-400">${esc(app.category)}</span>`
+                : `<span>★ ${esc(app.rating)}</span><span>•</span><span>${esc(app.size)}</span><span>•</span><span class="text-cyan-400">${esc(app.category)}</span>`;
 
             return `
                 <div class="glass-card rounded-2xl p-3 flex items-center gap-3">
                     ${rankCol}
                     <div onclick="openDetailsModal('${esc(app.id)}')"
-                         class="w-[52px] h-[52px] rounded-2xl overflow-hidden border border-cyan-400/30 flex-shrink-0 cursor-pointer">
+                         class="relative w-[52px] h-[52px] rounded-2xl overflow-hidden border border-cyan-400/30 flex-shrink-0 cursor-pointer">
+                        ${app.status === "upcoming" ? `<span class="absolute bottom-0.5 right-0.5 z-10 px-1 rounded bg-slate-950/85 border border-violet-400/50 text-violet-300 text-[7px] font-black">SOON</span>` : ""}
                         ${renderAppSvgIcon(app)}
                     </div>
                     <div onclick="openDetailsModal('${esc(app.id)}')" class="flex-1 min-w-0 cursor-pointer">
@@ -2410,11 +2415,7 @@
                         </div>
                         <p class="text-[11px] text-slate-400 truncate mt-0.5">${customSubHtml || esc(tagline)}</p>
                         <div class="flex items-center gap-2 mt-1 text-[10px] font-bold text-slate-400">
-                            <span>★ ${esc(app.rating)}</span>
-                            <span>•</span>
-                            <span>${esc(app.size)}</span>
-                            <span>•</span>
-                            <span class="text-cyan-400">${esc(app.category)}</span>
+                            ${metaStrip}
                         </div>
                     </div>
                     <div class="w-[86px] flex-shrink-0 flex flex-col gap-1.5">
@@ -2431,7 +2432,7 @@
         function renderListsAndBadges() {
             const t = I18N[lang];
             const liveApps = appsCatalog.filter((a) => a.status !== "upcoming");
-            const ranked = [...liveApps].sort((a, b) => (a.popularRank || 99) - (b.popularRank || 99));
+            const ranked = [...appsCatalog].sort((a, b) => (a.popularRank || 99) - (b.popularRank || 99));
 
             document.getElementById("topAppsList").innerHTML = ranked.map((a, i) => buildFullAppCard(a, i + 1)).join("");
 
@@ -2553,6 +2554,7 @@
             const app = appsCatalog.find((a) => a.id === appId);
             if (!app) return;
             detailModalAppId = appId;
+            const isUpcoming = app.status === "upcoming";
 
             document.getElementById("dtIconSlot").innerHTML = renderAppSvgIcon(app);
             document.getElementById("dtName").textContent = app.name;
@@ -2561,17 +2563,17 @@
             const badges = [];
             if (app.linkType === "official") {
                 badges.push(`<span class="px-2 py-0.5 rounded-full bg-sky-500/15 border border-sky-400/40 text-sky-400 text-[10px] font-extrabold">↗ Official Link</span>`);
-            } else if (app.status === "upcoming") {
-                badges.push(`<span class="px-2 py-0.5 rounded-full bg-violet-500/15 border border-violet-400/40 text-violet-300 text-[10px] font-extrabold">🚀 Upcoming</span>`);
+            } else if (isUpcoming) {
+                badges.push(`<span class="px-2 py-0.5 rounded-full bg-violet-500/15 border border-violet-400/40 text-violet-300 text-[10px] font-extrabold">🚀 Coming Soon</span>`);
             } else {
                 badges.push(`<span class="px-2 py-0.5 rounded-full bg-emerald-500/15 border border-emerald-500/35 text-emerald-400 text-[10px] font-extrabold">✓ Verified Safe</span>`);
             }
             badges.push(`<span class="px-2 py-0.5 rounded-full bg-cyan-500/15 border border-cyan-400/35 text-cyan-400 text-[10px] font-extrabold">${esc(app.category)}</span>`);
             document.getElementById("dtBadges").innerHTML = badges.join("");
 
-            document.getElementById("dtRating").textContent = `${app.rating} ★`;
-            document.getElementById("dtSize").textContent = app.size;
-            document.getElementById("dtVersion").textContent = app.version === "Official" ? "Official" : `v${app.version}`;
+            document.getElementById("dtRating").textContent = isUpcoming ? "Soon" : `${app.rating} ★`;
+            document.getElementById("dtSize").textContent = isUpcoming ? "Upcoming" : app.size;
+            document.getElementById("dtVersion").textContent = isUpcoming ? "SOON" : (app.version === "Official" ? "Official" : `v${app.version}`);
             document.getElementById("dtActionSlot").innerHTML = renderActionButton(app, "lg");
 
             // Render 9:16 Vertical Phone Frame Screenshots Carousel
@@ -2916,14 +2918,14 @@
                 const list = Object.keys(inst).map((id) => appsCatalog.find((a) => a.id === id)).filter(Boolean);
                 bodyEl.innerHTML = list.length
                     ? list.map((app) => buildFullAppCard(app, null, `<span class="text-emerald-400 font-bold">✓ Installed v${esc(inst[app.id])}</span>`)).join("")
-                    : `<p class="text-center text-slate-400 py-4">${lang === "bn" ? "এখনো কোনো অ্যাপ ইনস্টল করা হয়নি।" : "No installed apps recorded yet."}</p>`;
+                    : `<p class="text-center text-slate-400 py-4">${lang === "bn" ? "এখনো কোনো অ্যাপ ইনস্টল করা হয়নি।" : "No installed apps recorded yet."}</p>`;
             } else {
                 titleEl.textContent = lang === "bn" ? "📋 প্রি-রেজিস্টার্ড অ্যাপস" : "📋 Pre-registered Apps";
                 const reg = readStorage(STORAGE.REGISTERED, {});
                 const list = Object.keys(reg).map((id) => appsCatalog.find((a) => a.id === id)).filter(Boolean);
                 bodyEl.innerHTML = list.length
                     ? list.map((app) => buildFullAppCard(app, null)).join("")
-                    : `<p class="text-center text-slate-400 py-4">${lang === "bn" ? "কোনো আসন্ন অ্যাপে প্রি-রেজিস্টার করা হয়নি।" : "No pre-registered upcoming apps yet."}</p>`;
+                    : `<p class="text-center text-slate-400 py-4">${lang === "bn" ? "কোনো আসন্ন অ্যাপে প্রি-রেজিস্টার করা হয়নি।" : "No pre-registered upcoming apps yet."}</p>`;
             }
 
             document.getElementById("infoModal").classList.remove("hidden");
@@ -2936,9 +2938,9 @@
 
             document.getElementById("infoModalBody").innerHTML = lang === "bn"
                 ? `
-                    <div class="rounded-xl theme-input p-3"><b>১. APK ফাইল ওপেন করুন:</b> ব্রাউজারের Downloads থেকে ডাউনলোড হওয়া APK ফাইলে ট্যাপ করুন।</div>
+                    <div class="rounded-xl theme-input p-3"><b>১. APK ফাইল ওপেন করুন:</b> ব্রাউজারের Downloads থেকে ডাউনলোড হওয়া APK ফাইলে ট্যাপ করুন।</div>
                     <div class="rounded-xl theme-input p-3"><b>২. Unknown Apps চালু করুন:</b> ব্রাউজারের জন্য <b>Install unknown apps</b> পারমিশন অন করুন।</div>
-                    <div class="rounded-xl theme-input p-3 border-amber-500/40"><b>৩. Android 14/15 Restricted Settings আনলক:</b> ওভারলে পারমিশন (<i>Display over other apps</i>) লক দেখালে অ্যাপ আইকনে চেপে ধরে <b>App info (ⓘ)</b> → ওপরে ডানে <b>⋮ (৩ ডট)</b> মেনু → <b>Allow restricted settings</b> চালু করে পাসওয়ার্ড/ফিঙ্গারপ্রিন্ট দিন।</div>
+                    <div class="rounded-xl theme-input p-3 border-amber-500/40"><b>৩. Android 14/15 Restricted Settings আনলক:</b> ওভারলে পারমিশন (<i>Display over other apps</i>) লক দেখালে অ্যাপ আইকনে চেপে ধরে <b>App info (ⓘ)</b> → ওপরে ডানে <b>⋮ (৩ ডট)</b> মেনু → <b>Allow restricted settings</b> চালু করে পাসওয়ার্ড/ফিঙ্গারপ্রিন্ট দিন।</div>
                     <div class="rounded-xl theme-input p-3"><b>৪. ওভারলে চালু:</b> এবার <b>Display over other apps</b> সুইচ অন করলেই অ্যাপটি কাজ করবে!</div>
                 `
                 : `
@@ -2956,7 +2958,7 @@
             document.getElementById("infoModalTitle").textContent = lang === "bn" ? "🎧 AM সাপোর্ট ও যোগাযোগ" : "🎧 AM Support & Contact";
             document.getElementById("infoModalBody").innerHTML = lang === "bn"
                 ? `
-                    <p class="text-slate-400">যেকোনো অ্যাপ ইনস্টল সমস্যা, বাগ রিপোর্ট বা নতুন অ্যাপের রিকোয়েস্ট জানাতে আমাদের অফিশিয়াল চ্যানেলে যোগাযোগ করুন:</p>
+                    <p class="text-slate-400">যেকোনো অ্যাপ ইনস্টল সমস্যা, বাগ রিপোর্ট বা নতুন অ্যাপের রিকোয়েস্ট জানাতে আমাদের অফিশিয়াল চ্যানেলে যোগাযোগ করুন:</p>
                     <div class="grid grid-cols-2 gap-2.5">
                         <a href="${tg}" target="_blank" rel="noopener noreferrer"
                            class="p-3 rounded-xl bg-sky-500/15 border border-sky-400/40 text-sky-400 font-extrabold text-center">
@@ -3009,7 +3011,7 @@
                 return;
             }
             closeModal("infoModal");
-            showToast(lang === "bn" ? "✓ ধন্যবাদ! আপনার বার্তা গ্রহণ করা হয়েছে।" : "✓ Thank you! Your feedback has been recorded.");
+            showToast(lang === "bn" ? "✓ ধন্যবাদ! আপনার বার্তা গ্রহণ করা হয়েছে।" : "✓ Thank you! Your feedback has been recorded.");
         }
 
         function openLegalModal(type) {
@@ -3021,29 +3023,29 @@
                 if (type === "privacy") {
                     title = "🔒 প্রাইভেসি পলিসি (Privacy Policy)";
                     html = `
-                        <p><b>AM App Store</b> ইউজারদের ব্যক্তিগত তথ্যের সুরক্ষাকে সর্বোচ্চ গুরুত্ব দেয়।</p>
-                        <div class="rounded-xl theme-input p-3"><b>১. কোনো সংবেদনশীল তথ্য নেওয়া হয় না:</b> আমরা কোনো লগইন পাসওয়ার্ড, কনটাক্ট, গ্যালারি ফটো বা লোকেশন সংগ্রহ করি না।</div>
-                        <div class="rounded-xl theme-input p-3"><b>২. ব্রাউজার LocalStorage:</b> শুধুমাত্র থিম, ভাষা, প্রি-রেজিস্ট্রেশন ও ইনস্টল ভার্সন মনে রাখতে LocalStorage ব্যবহৃত হয়।</div>
-                        <div class="rounded-xl theme-input p-3"><b>৩. Firebase REST সিংক:</b> অ্যাপের ভার্সন ও পাবলিক ডাউনলোড লিংক লোড করতে Firebase Realtime Database ব্যবহৃত হয়।</div>
+                        <p><b>AM App Store</b> ইউজারদের ব্যক্তিগত তথ্যের সুরক্ষাকে সর্বোচ্চ গুরুত্ব দেয়।</p>
+                        <div class="rounded-xl theme-input p-3"><b>১. কোনো সংবেদনশীল তথ্য নেওয়া হয় না:</b> আমরা কোনো লগইন পাসওয়ার্ড, কনটাক্ট, গ্যালারি ফটো বা লোকেশন সংগ্রহ করি না।</div>
+                        <div class="rounded-xl theme-input p-3"><b>২. ব্রাউজার LocalStorage:</b> শুধুমাত্র থিম, ভাষা, প্রি-রেজিস্ট্রেশন ও ইনস্টল ভার্সন মনে রাখতে LocalStorage ব্যবহৃত হয়।</div>
+                        <div class="rounded-xl theme-input p-3"><b>৩. Firebase REST সিংক:</b> অ্যাপের ভার্সন ও পাবলিক ডাউনলোড লিংক লোড করতে Firebase Realtime Database ব্যবহৃত হয়।</div>
                     `;
                 } else if (type === "terms") {
                     title = "📜 ব্যবহারের শর্তাবলি (Terms of Use)";
                     html = `
-                        <div class="rounded-xl theme-input p-3">• সকল AM অ্যাপ শুধুমাত্র বিনোদন ও ব্যক্তিগত ইউটিলিটির জন্য তৈরি—অন্যকে হয়রানি করা নিষিদ্ধ।</div>
-                        <div class="rounded-xl theme-input p-3">• Android ডিভাইসে APK ইনস্টল ও ওভারলে পারমিশন দেওয়ার দায়িত্ব ইউজারের নিজস্ব।</div>
-                        <div class="rounded-xl theme-input p-3">• অনুমতি ছাড়া AM অ্যাপ বা ওয়েবসাইটের কোড ক্লোন বা মডিফাই করা নিষিদ্ধ।</div>
+                        <div class="rounded-xl theme-input p-3">• সকল AM অ্যাপ শুধুমাত্র বিনোদন ও ব্যক্তিগত ইউটিলিটির জন্য তৈরি—অন্যকে হয়রানি করা নিষিদ্ধ।</div>
+                        <div class="rounded-xl theme-input p-3">• Android ডিভাইসে APK ইনস্টল ও ওভারলে পারমিশন দেওয়ার দায়িত্ব ইউজারের নিজস্ব।</div>
+                        <div class="rounded-xl theme-input p-3">• অনুমতি ছাড়া AM অ্যাপ বা ওয়েবসাইটের কোড ক্লোন বা মডিফাই করা নিষিদ্ধ।</div>
                     `;
                 } else if (type === "disclaimer") {
                     title = "⚠️ ডিসক্লেইমার (Disclaimer)";
                     html = `
-                        <div class="rounded-xl theme-input p-3 border-amber-500/40"><b>স্বাধীন প্ল্যাটফর্ম:</b> AM App Store সম্পূর্ণ স্বাধীন—এর সাথে Garena, Free Fire, Google বা Google Play-এর কোনো অফিশিয়াল সম্পর্ক নেই।</div>
+                        <div class="rounded-xl theme-input p-3 border-amber-500/40"><b>স্বাধীন প্ল্যাটফর্ম:</b> AM App Store সম্পূর্ণ স্বাধীন—এর সাথে Garena, Free Fire, Google বা Google Play-এর কোনো অফিশিয়াল সম্পর্ক নেই।</div>
                         <div class="rounded-xl theme-input p-3">• AM Voice Prank ও অন্যান্য টুলস কোনো গেম ফাইল মডিফাই বা হ্যাক করে না।</div>
                     `;
                 } else {
                     title = "⚖️ DMCA ও কপিরাইট নীতি";
                     html = `
-                        <div class="rounded-xl theme-input p-3">• আমরা কখনোই পাইরেটেড বা Mod APK হোস্ট করি না। থার্ড-পার্টি অ্যাপ সরাসরি অফিশিয়াল Play Store লিংকে যুক্ত থাকে।</div>
-                        <div class="rounded-xl theme-input p-3">• কপিরাইট সংক্রান্ত অভিযোগ জানাতে নিচের মাধ্যমে যোগাযোগ করুন—২৪–৪৮ ঘণ্টার মধ্যে ব্যবস্থা নেওয়া হবে।</div>
+                        <div class="rounded-xl theme-input p-3">• আমরা কখনোই পাইরেটেড বা Mod APK হোস্ট করি না। থার্ড-পার্টি অ্যাপ সরাসরি অফিশিয়াল Play Store লিংকে যুক্ত থাকে।</div>
+                        <div class="rounded-xl theme-input p-3">• কপিরাইট সংক্রান্ত অভিযোগ জানাতে নিচের মাধ্যমে যোগাযোগ করুন—২৪–৪৮ ঘণ্টার মধ্যে ব্যবস্থা নেওয়া হবে।</div>
                         <a href="${tg}" target="_blank" rel="noopener noreferrer" class="block w-full py-2.5 rounded-xl bg-sky-500/15 border border-sky-400/40 text-sky-400 font-extrabold text-center">✈️ Telegram Takedown Contact</a>
                     `;
                 }
@@ -3175,6 +3177,7 @@
             const manageList = document.getElementById("admManageAppsList");
             manageList.innerHTML = appsCatalog.map((app) => {
                 const isArmed = deleteAppArmedId === app.id;
+                const verPill = app.status === "upcoming" ? "SOON" : `v${esc(app.version)}`;
                 return `
                     <div class="glass-card rounded-2xl p-3 space-y-2.5">
                         <div class="flex items-center gap-2.5">
@@ -3184,7 +3187,7 @@
                             <div class="flex-1 min-w-0">
                                 <div class="flex items-center gap-1.5">
                                     <span class="text-[13px] font-extrabold truncate">${esc(app.name)}</span>
-                                    <span class="px-1.5 py-0.5 rounded bg-cyan-500/15 text-cyan-400 text-[9.5px] font-extrabold">v${esc(app.version)}</span>
+                                    <span class="px-1.5 py-0.5 rounded bg-cyan-500/15 text-cyan-400 text-[9.5px] font-extrabold">${verPill}</span>
                                 </div>
                                 <div class="text-[10.5px] text-slate-400 truncate">
                                     ${esc(app.category)} • ${app.status === "upcoming" ? "Upcoming" : "Live"} • ${(app.screenshots || []).length} shots
@@ -3310,8 +3313,8 @@
 
             document.getElementById("admAppName").value = app.name || "";
             document.getElementById("admAppDev").value = app.developer || "AM Official Studio";
-            document.getElementById("admAppVer").value = app.version || "1.0";
-            document.getElementById("admAppSize").value = app.size || "7.5 MB";
+            document.getElementById("admAppVer").value = app.version === "Soon" ? "1.0" : (app.version || "1.0");
+            document.getElementById("admAppSize").value = app.size === "Upcoming" ? "7.5 MB" : (app.size || "7.5 MB");
             document.getElementById("admAppCat").value = app.category || "Gaming Tools";
             document.getElementById("admAppLinkType").value = app.linkType || "apk";
 
@@ -3391,7 +3394,7 @@
                 ? rawShots
                 : (Array.isArray(prevApp.screenshots) && prevApp.screenshots.length
                     ? prevApp.screenshots
-                    : [makePhoneScreenshotUri(name, category, "#22D3EE", "#0F172A", ["Official AM Release", "Verified & Safe", "Instant Download"])]);
+                    : [makePhoneScreenshotUri(name, category, "#22D3EE", "#0F172A", ["Official AM Release", "Verified & Safe", "Instant Preview"])]);
 
             const isUpcoming = placement === "upcoming";
             let popularRank = prevApp.popularRank || (appsCatalog.length + 1);
@@ -3404,9 +3407,9 @@
                 name,
                 developer,
                 category,
-                version: ver,
-                size,
-                rating: isUpcoming ? "New" : (prevApp.rating && prevApp.rating !== "New" ? prevApp.rating : "4.9"),
+                version: isUpcoming ? "Soon" : ver,
+                size: isUpcoming ? "Upcoming" : size,
+                rating: isUpcoming ? "Soon" : (prevApp.rating && prevApp.rating !== "Soon" ? prevApp.rating : "4.9"),
                 android: prevApp.android || "7.0+",
                 status: isUpcoming ? "upcoming" : "live",
                 linkType,
@@ -3421,8 +3424,8 @@
                 changelogBn: prevApp.changelogBn || changelogEn,
                 descEn,
                 descBn: prevApp.descBn || descEn,
-                colors: prevApp.colors || (isUpcoming ? ["#7C3AED", "#1E1B4B", "#EC4899"] : ["#22D3EE", "#0F172A", "#10B981"]),
-                glyph: prevApp.glyph || (category === "Soundboard" ? "🎵" : category === "Gaming Tools" ? "🎮" : "🛠️"),
+                colors: prevApp.colors || (isUpcoming ? ["#8B5CF6", "#1E1B4B", "#C084FC"] : ["#22D3EE", "#0F172A", "#10B981"]),
+                glyph: prevApp.glyph || (category === "Soundboard" ? "🎛️" : category === "Gaming Tools" ? "🗺️" : "🕹️"),
                 badge: prevApp.badge || name.replace(/\s+/g, "").slice(0, 4).toUpperCase()
             };
 
@@ -3478,7 +3481,6 @@
             }
             deleteAppArmedId = null;
             try {
-                // Mark deleted in Firebase so built-in or custom apps stay removed across reloads
                 await fetch(`${FIREBASE_BASE}/am_app_store/apps/${encodeURIComponent(appId)}.json`, {
                     method: "PUT",
                     headers: { "Content-Type": "application/json" },
@@ -3624,7 +3626,7 @@
                     }
                 }
 
-                // 2) Merge live apps from /am_app_store/apps.json
+                // 2) Merge live apps from /am_app_store/apps.json (ignoring retired demo IDs)
                 if (appsRes.ok) {
                     successCount++;
                     const remoteApps = await appsRes.json();
@@ -3633,6 +3635,7 @@
                             const item = remoteApps[key];
                             if (!item) return;
                             const id = item.id || key;
+                            if (RETIRED_DEMO_IDS.has(id)) return;
                             if (item._deleted) {
                                 delete mergedMap[id];
                                 return;
